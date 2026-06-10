@@ -59,6 +59,19 @@ async function initDB() {
       );
     `);
 
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS verification (
+        id           SERIAL PRIMARY KEY,
+        code_etab    INTEGER NOT NULL REFERENCES etablissement(code),
+        date_verif   DATE NOT NULL,
+        session      TEXT NOT NULL CHECK(session IN ('MATIN','APRES_MIDI')),
+        salle_id     INTEGER NOT NULL REFERENCES salle(id),
+        jury_id      INTEGER NOT NULL REFERENCES jury(id),
+        conforme     BOOLEAN NOT NULL,
+        heure_verif  TIMESTAMP DEFAULT NOW()
+      );
+    `);
+
     // Seed : charger les données si la table est vide
     const { rows } = await client.query('SELECT COUNT(*) as c FROM etablissement');
     if (parseInt(rows[0].c) === 0) {
@@ -305,4 +318,123 @@ initDB().then(() => {
 }).catch(err => {
   console.error('Erreur DB:', err);
   process.exit(1);
+});
+
+// ─── VÉRIFICATION ──────────────────────────────────────────────────────────
+
+// POST /verifier
+app.post('/verifier', async (req, res) => {
+  try {
+    const { qr_salle, qr_jury, date, session } = req.body;
+    if (!qr_salle || !qr_jury || !date || !session)
+      return res.status(400).json({ error: 'qr_salle, qr_jury, date, session requis' });
+
+    const partsSalle = qr_salle.split(':');
+    const partsJury  = qr_jury.split(':');
+    if (partsSalle[0] !== 'SALLE' || partsJury[0] !== 'JURY')
+      return res.status(400).json({ conforme: false, message: 'Format QR invalide' });
+
+    const codeEtabSalle = parseInt(partsSalle[1]);
+    const numSalle      = partsSalle[2];
+    const codeEtabJury  = parseInt(partsJury[1]);
+    const numeroJury    = parseInt(partsJury[2]);
+    const sessionUp     = session.toUpperCase();
+
+    if (codeEtabSalle !== codeEtabJury)
+      return res.json({ conforme: false, message: '❌ La salle et le jury ne sont pas du même établissement' });
+
+    const { rows: salleRows } = await pool.query(
+      'SELECT id, num_salle, capacite FROM salle WHERE code_etab=$1 AND num_salle=$2',
+      [codeEtabSalle, numSalle]);
+    if (!salleRows.length) return res.json({ conforme: false, message: '❌ Salle non trouvée' });
+    const salle = salleRows[0];
+
+    const { rows: juryRows } = await pool.query(
+      'SELECT id, numero, nom FROM jury WHERE code_etab=$1 AND numero=$2',
+      [codeEtabJury, numeroJury]);
+    if (!juryRows.length) return res.json({ conforme: false, message: '❌ Jury non trouvé' });
+    const jury = juryRows[0];
+
+    const { rows: dispatchRows } = await pool.query(
+      'SELECT id FROM dispatch WHERE code_etab=$1 AND date_disp=$2 AND session=$3 AND jury_id=$4 AND salle_id=$5',
+      [codeEtabSalle, date, sessionUp, jury.id, salle.id]);
+    const conforme = dispatchRows.length > 0;
+
+    let salleAttendue = null;
+    if (!conforme) {
+      const { rows: att } = await pool.query(
+        'SELECT s.num_salle FROM dispatch d JOIN salle s ON s.id=d.salle_id WHERE d.code_etab=$1 AND d.date_disp=$2 AND d.session=$3 AND d.jury_id=$4',
+        [codeEtabSalle, date, sessionUp, jury.id]);
+      if (att.length) salleAttendue = att[0].num_salle;
+    }
+
+    // Upsert verification
+    await pool.query(
+      'INSERT INTO verification(code_etab,date_verif,session,salle_id,jury_id,conforme) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT DO NOTHING',
+      [codeEtabSalle, date, sessionUp, salle.id, jury.id, conforme]);
+
+    res.json({
+      conforme,
+      message: conforme
+        ? `✅ Jury ${jury.numero}${jury.nom ? ' — '+jury.nom : ''} est bien en Salle ${salle.num_salle}`
+        : `❌ Jury ${jury.numero} ne devrait PAS être en Salle ${salle.num_salle}${salleAttendue ? '. Salle attendue : '+salleAttendue : ''}`,
+      jury_numero: jury.numero,
+      jury_nom: jury.nom,
+      num_salle: salle.num_salle,
+      salle_attendue: salleAttendue,
+      code_etab: codeEtabSalle
+    });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// GET /verifications/:code/:date/:session
+app.get('/verifications/:code/:date/:session', async (req, res) => {
+  try {
+    const { code, date, session } = req.params;
+    const { rows } = await pool.query(`
+      SELECT s.num_salle, j.numero AS jury_numero, j.nom AS jury_nom,
+             v.conforme, v.heure_verif
+      FROM verification v
+      JOIN salle s ON s.id=v.salle_id
+      JOIN jury  j ON j.id=v.jury_id
+      WHERE v.code_etab=$1 AND v.date_verif=$2 AND v.session=$3
+      ORDER BY s.num_salle, j.numero
+    `, [code, date, session.toUpperCase()]);
+    res.json(rows);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// GET /verifications/stats/:date/:session
+app.get('/verifications/stats/:date/:session', async (req, res) => {
+  try {
+    const { date, session } = req.params;
+    const { rows } = await pool.query(`
+      SELECT e.nom, e.code,
+        COUNT(v.id)::int AS total_verif,
+        SUM(CASE WHEN v.conforme THEN 1 ELSE 0 END)::int AS conformes,
+        SUM(CASE WHEN NOT v.conforme THEN 1 ELSE 0 END)::int AS non_conformes,
+        (SELECT COUNT(*) FROM jury j WHERE j.code_etab=e.code)::int AS total_jurys
+      FROM etablissement e
+      LEFT JOIN verification v ON v.code_etab=e.code AND v.date_verif=$1 AND v.session=$2
+      GROUP BY e.code, e.nom ORDER BY e.nom
+    `, [date, session.toUpperCase()]);
+    res.json(rows);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// GET /qrcodes/:code
+app.get('/qrcodes/:code', async (req, res) => {
+  try {
+    const code = parseInt(req.params.code);
+    const { rows: etabRows } = await pool.query('SELECT code, nom FROM etablissement WHERE code=$1', [code]);
+    if (!etabRows.length) return res.status(404).json({ error: 'Non trouvé' });
+    const { rows: salles } = await pool.query('SELECT num_salle FROM salle WHERE code_etab=$1 ORDER BY num_salle', [code]);
+    const { rows: jurys  } = await pool.query('SELECT numero, nom FROM jury WHERE code_etab=$1 ORDER BY numero', [code]);
+    res.json({
+      etablissement: etabRows[0],
+      qr_chef:   `CHEF:${code}`,
+      qr_salles: salles.map(s => ({ num_salle: s.num_salle, qr: `SALLE:${code}:${s.num_salle}` })),
+      qr_jurys:  jurys.map(j =>  ({ numero: j.numero, nom: j.nom, qr: `JURY:${code}:${j.numero}` }))
+    });
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
