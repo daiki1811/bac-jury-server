@@ -388,23 +388,7 @@ app.post('/verifier', async (req, res) => {
 });
 
 // GET /verifications/:code/:date/:session
-app.get('/verifications/:code/:date/:session', async (req, res) => {
-  try {
-    const { code, date, session } = req.params;
-    const { rows } = await pool.query(`
-      SELECT s.num_salle, j.numero AS jury_numero, j.nom AS jury_nom,
-             v.conforme, v.heure_verif
-      FROM verification v
-      JOIN salle s ON s.id=v.salle_id
-      JOIN jury  j ON j.id=v.jury_id
-      WHERE v.code_etab=$1 AND v.date_verif=$2 AND v.session=$3
-      ORDER BY s.num_salle, j.numero
-    `, [code, date, session.toUpperCase()]);
-    res.json(rows);
-  } catch (err) { res.status(500).json({ error: err.message }); }
-});
-
-// GET /verifications/stats/:date/:session
+// GET /verifications/stats/:date/:session  — doit être AVANT /:code/:date/:session
 app.get('/verifications/stats/:date/:session', async (req, res) => {
   try {
     const { date, session } = req.params;
@@ -424,6 +408,23 @@ app.get('/verifications/stats/:date/:session', async (req, res) => {
       LEFT JOIN dernieres d ON d.code_etab=e.code
       GROUP BY e.code, e.nom ORDER BY e.nom
     `, [date, session.toUpperCase()]);
+    res.json(rows);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// GET /verifications/:code/:date/:session
+app.get('/verifications/:code/:date/:session', async (req, res) => {
+  try {
+    const { code, date, session } = req.params;
+    const { rows } = await pool.query(`
+      SELECT s.num_salle, j.numero AS jury_numero, j.nom AS jury_nom,
+             v.conforme, v.heure_verif
+      FROM verification v
+      JOIN salle s ON s.id=v.salle_id
+      JOIN jury  j ON j.id=v.jury_id
+      WHERE v.code_etab=$1 AND v.date_verif=$2 AND v.session=$3
+      ORDER BY s.num_salle, j.numero
+    `, [code, date, session.toUpperCase()]);
     res.json(rows);
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
