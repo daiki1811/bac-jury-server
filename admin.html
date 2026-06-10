@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Gestion des Jurys BAC</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a;padding:24px}
+  h1{font-size:20px;font-weight:600;margin-bottom:4px}
+  .subtitle{color:#666;font-size:13px;margin-bottom:24px}
+  .card{background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:20px;margin-bottom:16px}
+  .card h2{font-size:15px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  label{display:block;font-size:13px;color:#555;margin-bottom:4px;margin-top:12px}
+  select,input[type=date],input[type=text]{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:14px;background:#fff}
+  select:focus,input:focus{outline:2px solid #3b82f6;outline-offset:1px}
+  button{padding:9px 18px;border-radius:7px;border:none;font-size:14px;font-weight:500;cursor:pointer;transition:opacity .15s}
+  .btn-primary{background:#1d4ed8;color:#fff}
+  .btn-primary:hover{opacity:.85}
+  .btn-danger{background:#dc2626;color:#fff}
+  .btn-danger:hover{opacity:.85}
+  .btn-success{background:#16a34a;color:#fff}
+  .btn-success:hover{opacity:.85}
+  .btn-sec{background:#f3f4f6;color:#374151;border:1px solid #d1d5db}
+  .btn-sec:hover{background:#e5e7eb}
+  .msg{padding:10px 14px;border-radius:7px;font-size:13px;margin-top:12px;display:none}
+  .msg.ok{background:#dcfce7;color:#166534;display:block}
+  .msg.err{background:#fee2e2;color:#991b1b;display:block}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .row>*{flex:1;min-width:180px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+  th{text-align:left;padding:8px 10px;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-weight:500;color:#6b7280}
+  td{padding:8px 10px;border-bottom:1px solid #f3f4f6;vertical-align:top}
+  tr:hover td{background:#fafafa}
+  .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
+  .b-blue{background:#dbeafe;color:#1e40af}
+  .b-green{background:#dcfce7;color:#166534}
+  .b-gray{background:#f3f4f6;color:#374151}
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px}
+  .stat{background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:12px;text-align:center}
+  .stat-v{font-size:24px;font-weight:700;color:#1d4ed8}
+  .stat-l{font-size:11px;color:#6b7280;margin-top:2px}
+  .section-title{font-size:13px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.04em;margin:16px 0 8px}
+  .spinner{display:none;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-left:6px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<h1>🎓 Gestion des Jurys — Baccalauréat</h1>
+<p class="subtitle">Interface administrateur — Dispatch des jurys par établissement</p>
+
+<!-- Stats globales -->
+<div class="stats-grid" id="statsGrid">
+  <div class="stat"><div class="stat-v" id="st-etab">—</div><div class="stat-l">Établissements</div></div>
+  <div class="stat"><div class="stat-v" id="st-jurys">—</div><div class="stat-l">Jurys total</div></div>
+  <div class="stat"><div class="stat-v" id="st-salles">—</div><div class="stat-l">Salles (type G)</div></div>
+</div>
+
+<!-- Dispatch global -->
+<div class="card">
+  <h2>🔀 Dispatch global — tous les établissements</h2>
+  <div class="row">
+    <div>
+      <label>Date de l'examen</label>
+      <input type="date" id="g-date">
+    </div>
+    <div>
+      <label>Session</label>
+      <select id="g-session">
+        <option value="MATIN">Matin</option>
+        <option value="APRES_MIDI">Après-midi</option>
+      </select>
+    </div>
+  </div>
+  <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn-primary" onclick="dispatchTous()">
+      🔀 Générer le dispatch pour TOUS les centres
+      <span class="spinner" id="sp-tous"></span>
+    </button>
+  </div>
+  <div class="msg" id="msg-tous"></div>
+</div>
+
+<!-- Dispatch par établissement -->
+<div class="card">
+  <h2>🏫 Dispatch par établissement</h2>
+  <div class="row">
+    <div>
+      <label>Établissement</label>
+      <select id="etab-sel" onchange="loadSessionsEtab()">
+        <option value="">— Choisir —</option>
+      </select>
+    </div>
+    <div>
+      <label>Date</label>
+      <input type="date" id="e-date">
+    </div>
+    <div>
+      <label>Session</label>
+      <select id="e-session">
+        <option value="MATIN">Matin</option>
+        <option value="APRES_MIDI">Après-midi</option>
+      </select>
+    </div>
+  </div>
+  <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn-primary" onclick="dispatchEtab()">
+      🔀 Générer ce dispatch
+      <span class="spinner" id="sp-etab"></span>
+    </button>
+    <button class="btn-sec" onclick="voirDispatch()">👁 Voir le dispatch</button>
+  </div>
+  <div class="msg" id="msg-etab"></div>
+
+  <div id="dispatch-result" style="display:none">
+    <div class="section-title" id="dispatch-title"></div>
+    <table>
+      <thead><tr><th>Salle</th><th>Capacité</th><th>Jury n°</th><th>Nom du jury</th></tr></thead>
+      <tbody id="dispatch-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Tableau de bord établissements -->
+<div class="card">
+  <h2>📋 Tableau de bord des centres</h2>
+  <table>
+    <thead><tr><th>Code</th><th>Établissement</th><th>Salles</th><th>Jurys</th></tr></thead>
+    <tbody id="etab-tbody"></tbody>
+  </table>
+</div>
+
+<script>
+const API = '';
+
+async function api(path, opts) {
+  const r = await fetch(API + path, opts);
+  return r.json();
+}
+
+function today() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function showMsg(id, text, ok) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = 'msg ' + (ok ? 'ok' : 'err');
+}
+
+function spin(id, on) {
+  document.getElementById(id).style.display = on ? 'inline-block' : 'none';
+}
+
+async function loadStats() {
+  const etabs = await api('/etablissements');
+  document.getElementById('st-etab').textContent = etabs.length;
+  let jurys = 0, salles = 0;
+  etabs.forEach(e => { jurys += e.nb_jurys; salles += e.nb_salles; });
+  document.getElementById('st-jurys').textContent = jurys;
+  document.getElementById('st-salles').textContent = salles;
+
+  const sel = document.getElementById('etab-sel');
+  etabs.sort((a,b)=>a.nom.localeCompare(b.nom));
+  etabs.forEach(e => {
+    const opt = document.createElement('option');
+    opt.value = e.code;
+    opt.textContent = e.nom;
+    sel.appendChild(opt);
+  });
+
+  const tbody = document.getElementById('etab-tbody');
+  tbody.innerHTML = etabs.map(e => `
+    <tr>
+      <td><span class="badge b-gray">${e.code}</span></td>
+      <td>${e.nom}</td>
+      <td><span class="badge b-blue">${e.nb_salles} salles</span></td>
+      <td><span class="badge b-green">${e.nb_jurys} jurys</span></td>
+    </tr>
+  `).join('');
+}
+
+async function dispatchTous() {
+  const date = document.getElementById('g-date').value;
+  const session = document.getElementById('g-session').value;
+  if (!date) return showMsg('msg-tous', 'Veuillez sélectionner une date.', false);
+  spin('sp-tous', true);
+  const r = await api('/dispatch/generer-tous', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ date, session })
+  });
+  spin('sp-tous', false);
+  showMsg('msg-tous', r.message || r.error, !!r.success);
+}
+
+async function dispatchEtab() {
+  const code = document.getElementById('etab-sel').value;
+  const date = document.getElementById('e-date').value;
+  const session = document.getElementById('e-session').value;
+  if (!code || !date) return showMsg('msg-etab', 'Choisir un établissement et une date.', false);
+  spin('sp-etab', true);
+  const r = await api('/dispatch/generer', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ code_etab: parseInt(code), date, session })
+  });
+  spin('sp-etab', false);
+  showMsg('msg-etab', r.message || r.error, !!r.success);
+  if (r.success) voirDispatch();
+}
+
+async function voirDispatch() {
+  const code = document.getElementById('etab-sel').value;
+  const date = document.getElementById('e-date').value;
+  const session = document.getElementById('e-session').value;
+  if (!code || !date) return;
+  const data = await api(`/dispatch/${code}/${date}/${session}`);
+  const result = document.getElementById('dispatch-result');
+  const titre = document.getElementById('dispatch-title');
+  const tbody = document.getElementById('dispatch-tbody');
+  const sessionLabel = session === 'MATIN' ? '🌅 Matin' : '🌇 Après-midi';
+  titre.textContent = `Affectations — ${date} — ${sessionLabel} (${data.length} jurys)`;
+  if (data.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#999;padding:20px">Aucun dispatch pour cette session.</td></tr>';
+  } else {
+    tbody.innerHTML = data.map(d => `
+      <tr>
+        <td><strong>Salle ${d.num_salle}</strong></td>
+        <td>${d.capacite} candidats</td>
+        <td><span class="badge b-blue">Jury ${d.jury_numero}</span></td>
+        <td>${d.jury_nom || '<span style="color:#999;font-style:italic">Non recruté</span>'}</td>
+      </tr>
+    `).join('');
+  }
+  result.style.display = 'block';
+}
+
+function loadSessionsEtab() {}
+
+// Init
+document.getElementById('g-date').value = today();
+document.getElementById('e-date').value = today();
+loadStats();
+</script>
+</body>
+</html>

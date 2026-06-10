@@ -1,0 +1,2063 @@
+{
+  "etablissements": [
+    {
+      "CODEETABLISSEMENT": 152005,
+      "NOMETABLISSEMENT": "LP KATOLIKA SAINT MICHEL"
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "NOMETABLISSEMENT": "COLLEGE SAINT PAUL FARATSIHO"
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "NOMETABLISSEMENT": "LP SAINT PIERRE MANDOTO"
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "NOMETABLISSEMENT": "CEG BETAFO"
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "NOMETABLISSEMENT": "GROUPE SCOLAIRE CATHOLIQUE SAINT LOUIS BETAFO"
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "NOMETABLISSEMENT": "LYCEE BETAFO"
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "NOMETABLISSEMENT": "LYCEE PRIVE CATHOLIQUE ST JOSEPH AMBOHIBARY A/be"
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "NOMETABLISSEMENT": "COLLEGE PROVIDENCE ANTSIRABE"
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "NOMETABLISSEMENT": "CEG MAHAZOARIVO"
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "NOMETABLISSEMENT": "LPC ST MARTIN ANTANIVAO ANTSIRABE"
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "NOMETABLISSEMENT": "CEG SOAMALAZA"
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "NOMETABLISSEMENT": "LP FJKM KAMAFA MAHAFALY"
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "NOMETABLISSEMENT": "LP SAINTE THERESE MAHAZOARIVO"
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "NOMETABLISSEMENT": "LP ST JOSEPH ANTSIRABE"
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "NOMETABLISSEMENT": "SEKOLY LOTERANA FARIMBONA"
+    },
+    {
+      "CODEETABLISSEMENT": 128016,
+      "NOMETABLISSEMENT": "LP LUTHERIEN MANGARIVOTRA"
+    },
+    {
+      "CODEETABLISSEMENT": 128001,
+      "NOMETABLISSEMENT": "LYCEE ANDRE RESAMPA"
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "NOMETABLISSEMENT": "LP CATHOLIQUE SAINT CLAUDE AMBOHIMANDROSO"
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "NOMETABLISSEMENT": "LPC SAINTE THERESE ANTANIFOTSY"
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "NOMETABLISSEMENT": "LYCEE ANTANIFOTSY"
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "NOMETABLISSEMENT": "EPP MANARAPENITRA ANTANIMARINA AMBATOLAMPY"
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "NOMETABLISSEMENT": "CEG AMBATOLAMPY"
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "NOMETABLISSEMENT": "LP FJKM AMBATOLAMPY"
+    }
+  ],
+  "salles": [
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "16",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "17",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "18",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "19",
+      "capaciteaccueil": 27
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "20",
+      "capaciteaccueil": 27
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "21",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "22",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "23",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "24",
+      "capaciteaccueil": 27
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "25",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "26",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 125008,
+      "numSalle": "27",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "1",
+      "capaciteaccueil": 31
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "10",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "11",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "12",
+      "capaciteaccueil": 24
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "13",
+      "capaciteaccueil": 26
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "14",
+      "capaciteaccueil": 22
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "15",
+      "capaciteaccueil": 35
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "16",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "17",
+      "capaciteaccueil": 26
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "18",
+      "capaciteaccueil": 37
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "19",
+      "capaciteaccueil": 33
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "2",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "20",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "21",
+      "capaciteaccueil": 29
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "22",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "23",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "24",
+      "capaciteaccueil": 22
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "25",
+      "capaciteaccueil": 35
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "26",
+      "capaciteaccueil": 21
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "27",
+      "capaciteaccueil": 21
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "28",
+      "capaciteaccueil": 35
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "3",
+      "capaciteaccueil": 31
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "4",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "5",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "6",
+      "capaciteaccueil": 23
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "7",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "8",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 125022,
+      "numSalle": "9",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "1",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "10",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "11",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "12",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "2",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "3",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "4",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "5",
+      "capaciteaccueil": 35
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "6",
+      "capaciteaccueil": 35
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "7",
+      "capaciteaccueil": 35
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "8",
+      "capaciteaccueil": 35
+    },
+    {
+      "CODEETABLISSEMENT": 125043,
+      "numSalle": "9",
+      "capaciteaccueil": 35
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "01",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "02",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "03",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "04",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "05",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "06",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "07",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "08",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "09",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "10",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "11",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "12",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 126001,
+      "numSalle": "13",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "1",
+      "capaciteaccueil": 28
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "10",
+      "capaciteaccueil": 24
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "11",
+      "capaciteaccueil": 26
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "12",
+      "capaciteaccueil": 28
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "13",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "14",
+      "capaciteaccueil": 28
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "15",
+      "capaciteaccueil": 26
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "16",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "2",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "3",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "4",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "5",
+      "capaciteaccueil": 28
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "6",
+      "capaciteaccueil": 28
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "7",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "8",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 126003,
+      "numSalle": "9",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "1",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "10",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "11",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "12",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "13",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "14",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "15",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "16",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "17",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "18",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "19",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "2",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "20",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "21",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "22",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "23",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "24",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "25",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "26",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "27",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "28",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "3",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "4",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "5",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "6",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "7",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "8",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 127006,
+      "numSalle": "9",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 128001,
+      "numSalle": "18",
+      "capaciteaccueil": 18
+    },
+    {
+      "CODEETABLISSEMENT": 128001,
+      "numSalle": "19",
+      "capaciteaccueil": 18
+    },
+    {
+      "CODEETABLISSEMENT": 128016,
+      "numSalle": "1",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128016,
+      "numSalle": "2",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128016,
+      "numSalle": "3",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128016,
+      "numSalle": "4",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128016,
+      "numSalle": "5",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128016,
+      "numSalle": "6",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128016,
+      "numSalle": "7",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128016,
+      "numSalle": "8",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128016,
+      "numSalle": "9",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "1",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "10",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "11",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "12",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "2",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "3",
+      "capaciteaccueil": 44
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "4",
+      "capaciteaccueil": 44
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "5",
+      "capaciteaccueil": 44
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "6",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "7",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "8",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "EN1",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "EN2",
+      "capaciteaccueil": 26
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "EN3",
+      "capaciteaccueil": 26
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "EN4",
+      "capaciteaccueil": 26
+    },
+    {
+      "CODEETABLISSEMENT": 128017,
+      "numSalle": "EN5",
+      "capaciteaccueil": 26
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "01",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "02",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "03",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "04",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "05",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "06",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "07",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "08",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "09",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "10",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "11",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "12",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "13",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "14",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "15",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "16",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "17",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "18",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "19",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "20",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "21",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "22",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "23",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "24",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "25",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128019,
+      "numSalle": "26",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "01",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "02",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "03",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "04",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "05",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "06",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "07",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "08",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "09",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "10",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "11",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "12",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "13",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "14",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "15",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "16",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "17",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "18",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128021,
+      "numSalle": "19",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "01",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "02",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "03",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "04",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "05",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "06",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "07",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "08",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "09",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "10",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "11",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "12",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "13",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 128085,
+      "numSalle": "14",
+      "capaciteaccueil": 100
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "1",
+      "capaciteaccueil": 33
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "10",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "11",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "12",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "13",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "14",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "15",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "16",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "17",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "18",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "19",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "2",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "20",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "3",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "4",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "5",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "6",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "7",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "8",
+      "capaciteaccueil": 11
+    },
+    {
+      "CODEETABLISSEMENT": 128087,
+      "numSalle": "9",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "01",
+      "capaciteaccueil": 42
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "02",
+      "capaciteaccueil": 42
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "03",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "04",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "05",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "06",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "07",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "08",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "09",
+      "capaciteaccueil": 42
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "10",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "11",
+      "capaciteaccueil": 42
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "12",
+      "capaciteaccueil": 42
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "13",
+      "capaciteaccueil": 42
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "14",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "15",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "16",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "17",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "18",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "19",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "20",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "21",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128102,
+      "numSalle": "22",
+      "capaciteaccueil": 42
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "01",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "02",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "03",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "04",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "05",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "06",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "07",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "08",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "09",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "10",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "11",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "12",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "13",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "14",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "15",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "16",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "17",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "18",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "19",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "20",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "21",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128104,
+      "numSalle": "22",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "01",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "02",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "03",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "04",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "05",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "06",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "07",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "08",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "09",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "10",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "11",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "12",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "13",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "14",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "15",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "16",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "17",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "18",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 128132,
+      "numSalle": "19",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S1",
+      "capaciteaccueil": 33
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S10",
+      "capaciteaccueil": 22
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S11",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S12",
+      "capaciteaccueil": 30
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S2",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S3",
+      "capaciteaccueil": 39
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S4",
+      "capaciteaccueil": 37
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S5",
+      "capaciteaccueil": 37
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S6",
+      "capaciteaccueil": 41
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S7",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S8",
+      "capaciteaccueil": 38
+    },
+    {
+      "CODEETABLISSEMENT": 129005,
+      "numSalle": "S9",
+      "capaciteaccueil": 20
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "1",
+      "capaciteaccueil": 39
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "10",
+      "capaciteaccueil": 57
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "11",
+      "capaciteaccueil": 64
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "2",
+      "capaciteaccueil": 33
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "3",
+      "capaciteaccueil": 39
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "4",
+      "capaciteaccueil": 29
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "5",
+      "capaciteaccueil": 38
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "6",
+      "capaciteaccueil": 56
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "7",
+      "capaciteaccueil": 39
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "8",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 130001,
+      "numSalle": "9",
+      "capaciteaccueil": 63
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "1",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "1 GS LYCEE",
+      "capaciteaccueil": 45
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "10",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "11",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "12",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "13",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "14",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "15",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "16",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "17",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "18",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "19",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "2",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "20",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "21",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "22",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "23",
+      "capaciteaccueil": 34
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "25 GS-CEG",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "3",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "4",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "5",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "6",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "7",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "8",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 130003,
+      "numSalle": "9",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "01",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "02",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "03",
+      "capaciteaccueil": 48
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "04",
+      "capaciteaccueil": 48
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "05",
+      "capaciteaccueil": 48
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "06",
+      "capaciteaccueil": 56
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "07",
+      "capaciteaccueil": 56
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "08",
+      "capaciteaccueil": 48
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "09",
+      "capaciteaccueil": 48
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "10",
+      "capaciteaccueil": 48
+    },
+    {
+      "CODEETABLISSEMENT": 130021,
+      "numSalle": "11",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "1",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "10",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "11",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "12",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "13",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "14",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "15",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "16",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "17",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "18",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "19",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "2",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "20",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "3",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "5",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "6",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "7",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 131004,
+      "numSalle": "9",
+      "capaciteaccueil": 25
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "1",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "10",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "11",
+      "capaciteaccueil": 60
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "12",
+      "capaciteaccueil": 40
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "13",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "14",
+      "capaciteaccueil": 46
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "15",
+      "capaciteaccueil": 48
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "16",
+      "capaciteaccueil": 48
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "17",
+      "capaciteaccueil": 48
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "18",
+      "capaciteaccueil": 38
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "19",
+      "capaciteaccueil": 52
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "2",
+      "capaciteaccueil": 38
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "20",
+      "capaciteaccueil": 54
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "21",
+      "capaciteaccueil": 52
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "22",
+      "capaciteaccueil": 54
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "23",
+      "capaciteaccueil": 54
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "24",
+      "capaciteaccueil": 54
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "25",
+      "capaciteaccueil": 54
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "26",
+      "capaciteaccueil": 54
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "27",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "28",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "29",
+      "capaciteaccueil": 109
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "3",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "4",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "5",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "6",
+      "capaciteaccueil": 50
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "7",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "8",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 132003,
+      "numSalle": "9",
+      "capaciteaccueil": 36
+    },
+    {
+      "CODEETABLISSEMENT": 152005,
+      "numSalle": "01",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 152005,
+      "numSalle": "05",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 152005,
+      "numSalle": "06",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 152005,
+      "numSalle": "07",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 152005,
+      "numSalle": "08",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 152005,
+      "numSalle": "2",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 152005,
+      "numSalle": "3",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 152005,
+      "numSalle": "4",
+      "capaciteaccueil": 32
+    },
+    {
+      "CODEETABLISSEMENT": 152005,
+      "numSalle": "9",
+      "capaciteaccueil": 32
+    }
+  ]
+}
