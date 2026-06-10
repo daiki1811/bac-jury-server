@@ -409,13 +409,19 @@ app.get('/verifications/stats/:date/:session', async (req, res) => {
   try {
     const { date, session } = req.params;
     const { rows } = await pool.query(`
+      WITH dernieres AS (
+        SELECT DISTINCT ON (code_etab, jury_id) code_etab, jury_id, conforme
+        FROM verification
+        WHERE date_verif=$1 AND session=$2
+        ORDER BY code_etab, jury_id, heure_verif DESC
+      )
       SELECT e.nom, e.code,
-        COUNT(v.id)::int AS total_verif,
-        SUM(CASE WHEN v.conforme THEN 1 ELSE 0 END)::int AS conformes,
-        SUM(CASE WHEN NOT v.conforme THEN 1 ELSE 0 END)::int AS non_conformes,
+        COUNT(d.jury_id)::int AS total_verif,
+        SUM(CASE WHEN d.conforme THEN 1 ELSE 0 END)::int AS conformes,
+        SUM(CASE WHEN NOT d.conforme THEN 1 ELSE 0 END)::int AS non_conformes,
         (SELECT COUNT(*) FROM jury j WHERE j.code_etab=e.code)::int AS total_jurys
       FROM etablissement e
-      LEFT JOIN verification v ON v.code_etab=e.code AND v.date_verif=$1 AND v.session=$2
+      LEFT JOIN dernieres d ON d.code_etab=e.code
       GROUP BY e.code, e.nom ORDER BY e.nom
     `, [date, session.toUpperCase()]);
     res.json(rows);

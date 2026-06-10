@@ -243,16 +243,31 @@ function filtrerQR(){
 
 async function chargerVerifs(){
   const date=document.getElementById('v-date').value,session=document.getElementById('v-session').value;
-  if(!date)return;
-  const data=await api(`/verifications/stats/${date}/${session}`);
-  document.getElementById('v-tbody').innerHTML=data.map(e=>{
-    const pct=e.total_jurys>0?Math.round((e.total_verif/e.total_jurys)*100):0;
-    return `<tr><td>${e.nom}</td><td>${e.total_jurys}</td><td>${e.total_verif}</td>
-    <td><span class="bx bg">${e.conformes||0}</span></td>
-    <td>${e.non_conformes>0?`<span class="bx br">${e.non_conformes}</span>`:'<span class="bx bk">0</span>'}</td>
-    <td style="min-width:120px"><div style="font-size:11px;color:#666">${pct}%</div><div class="pb"><div class="pf" style="width:${pct}%"></div></div></td></tr>`;
-  }).join('');
-  document.getElementById('v-result').style.display='block';
+  if(!date)return alert('Sélectionnez une date.');
+  try {
+    const data=await api(`/verifications/stats/${date}/${session}`);
+    if(!Array.isArray(data)){
+      console.error('Erreur API verifications/stats:', data);
+      alert('Erreur serveur : '+(data.error||JSON.stringify(data)));
+      return;
+    }
+    if(data.length===0){
+      document.getElementById('v-tbody').innerHTML='<tr><td colspan="6" style="text-align:center;color:#999;padding:20px">Aucune donnée pour cette date/session.</td></tr>';
+      document.getElementById('v-result').style.display='block';
+      return;
+    }
+    document.getElementById('v-tbody').innerHTML=data.map(e=>{
+      const pct=e.total_jurys>0?Math.round((e.total_verif/e.total_jurys)*100):0;
+      return `<tr><td>${e.nom}</td><td>${e.total_jurys}</td><td>${e.total_verif}</td>
+      <td><span class="bx bg">${e.conformes||0}</span></td>
+      <td>${e.non_conformes>0?`<span class="bx br">${e.non_conformes}</span>`:'<span class="bx bk">0</span>'}</td>
+      <td style="min-width:120px"><div style="font-size:11px;color:#666">${pct}%</div><div class="pb"><div class="pf" style="width:${pct}%"></div></div></td></tr>`;
+    }).join('');
+    document.getElementById('v-result').style.display='block';
+  } catch(err){
+    console.error('Erreur chargerVerifs:', err);
+    alert('Erreur de connexion : '+err.message);
+  }
 }
 
 document.getElementById('g-date').value=today();
