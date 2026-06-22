@@ -8,7 +8,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a}
 nav{background:#1d4ed8;display:flex;flex-wrap:wrap}
-nav a{color:rgba(255,255,255,.7);padding:13px 16px;font-size:14px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+nav a{color:rgba(255,255,255,.7);padding:13px 16px;font-size:14px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;user-select:none}
 nav a.active{color:#fff;border-bottom-color:#fff}
 .page{display:none;padding:20px;max-width:1100px;margin:0 auto}
 .page.active{display:block}
@@ -47,6 +47,10 @@ tr:hover td{background:#fafafa}
 .sp{display:none;width:13px;height:13px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-left:5px}
 @keyframes spin{to{transform:rotate(360deg)}}
 input[type=text].jury-nom-input{padding:4px 7px;font-size:12px;border:1px solid #ddd;border-radius:5px;width:180px}
+.signal-card{background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:16px;margin-bottom:12px}
+.signal-card img{margin-top:10px;max-width:100%;max-height:280px;border-radius:8px;object-fit:cover;cursor:pointer;display:block}
+.signal-desc{margin-top:10px;padding:10px 14px;background:#fef9f0;border-radius:7px;font-size:13px;border-left:3px solid #d97706;line-height:1.5}
+.signal-meta{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px}
 @media print{nav,.no-print{display:none!important}.card{border:none;padding:0}body{background:#fff}.qr-grid{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
@@ -199,12 +203,16 @@ input[type=text].jury-nom-input{padding:4px 7px;font-size:12px;border:1px solid 
 <div class="page" id="page-signal">
   <h1>Signalements de fraude</h1><p class="sub">Photos et descriptions envoyées par les chefs de centre</p>
   <div class="card">
-    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
       <button class="btn bp" onclick="chargerSignalements()">🔄 Actualiser</button>
       <span id="signal-count" style="font-size:13px;color:#6b7280"></span>
     </div>
   </div>
-  <div id="signal-list"></div>
+  <div id="signal-list">
+    <div style="text-align:center;padding:40px;color:#999;font-size:14px">
+      Cliquez sur Actualiser pour charger les signalements
+    </div>
+  </div>
 </div>
 
 <script>
@@ -227,37 +235,28 @@ function showPage(name,el){
   el.classList.add('active');
 }
 
-// ── Init ────────────────────────────────────────────────────────────────────
 async function init(){
-  // Charger étabs
   allEtabs = await api('/etablissements');
   allEtabs.sort((a,b)=>a.nom.localeCompare(b.nom));
   let j=0,s=0; allEtabs.forEach(e=>{j+=e.nb_jurys;s+=e.nb_salles;});
   document.getElementById('st-e').textContent=allEtabs.length;
   document.getElementById('st-j').textContent=j;
   document.getElementById('st-s').textContent=s;
-
-  // Remplir selects étabs
   ['etab-sel','qr-etab','jury-etab-sel'].forEach(id=>{
     const sel=document.getElementById(id);
     allEtabs.forEach(e=>{const o=document.createElement('option');o.value=e.code;o.textContent=e.nom;sel.appendChild(o);});
   });
-
-  // Charger jours
   await chargerJours();
 }
 
-// ── Jours ───────────────────────────────────────────────────────────────────
 async function chargerJours(){
   try {
     allJours = await api('/jours/tous');
-    // Remplir les selects de dates
     ['g-date','e-date','v-date'].forEach(id=>{
       const sel=document.getElementById(id);
       const cur=sel.value;
       sel.innerHTML='<option value="">— Choisir un jour —</option>';
-      allJours.forEach(j=>{
-        if(!j.actif) return;
+      allJours.filter(j=>j.actif).forEach(j=>{
         const o=document.createElement('option');
         o.value=j.date_exam.slice(0,10);
         o.textContent=j.label+' ('+j.date_exam.slice(0,10)+')';
@@ -265,14 +264,13 @@ async function chargerJours(){
       });
       if(cur) sel.value=cur;
     });
-    // Tableau des jours
     document.getElementById('j-tbody').innerHTML = allJours.length===0
       ? '<tr><td colspan="4" style="text-align:center;padding:20px;color:#999">Aucun jour configuré</td></tr>'
       : allJours.map(j=>`<tr>
           <td>${j.date_exam.slice(0,10)}</td>
           <td>${j.label}</td>
           <td>${j.actif?'<span class="bx bg3">Actif</span>':'<span class="bx bk">Inactif</span>'}</td>
-          <td class="no-print"><button class="btn bd" style="margin:0;padding:3px 10px;font-size:12px" onclick="supprimerJour(${j.id})">🗑 Supprimer</button></td>
+          <td class="no-print"><button class="btn bd" style="margin:0;padding:3px 10px;font-size:12px" onclick="supprimerJour(${j.id})">🗑</button></td>
         </tr>`).join('');
   } catch(e){ console.error(e); }
 }
@@ -292,11 +290,10 @@ async function ajouterJour(){
 
 async function supprimerJour(id){
   if(!confirm('Supprimer ce jour ?')) return;
-  await api(`/jours/${id}`,{method:'DELETE'});
+  await api('/jours/'+id,{method:'DELETE'});
   await chargerJours();
 }
 
-// ── Dispatch ────────────────────────────────────────────────────────────────
 async function dispatchTous(){
   const date=document.getElementById('g-date').value;
   const session=document.getElementById('g-session').value;
@@ -328,49 +325,42 @@ async function voirDispatch(){
   const date=document.getElementById('e-date').value;
   const session=document.getElementById('e-session').value;
   if(!code||!date) return;
-  const data=await api(`/dispatch/${code}/${date}/${session}`);
-  const sl=session==='MATIN'?'Matin':'Après-midi';
-  document.getElementById('d-title').textContent=`${data.length} affectations — ${date} — ${sl}`;
+  const data=await api('/dispatch/'+code+'/'+date+'/'+session);
+  document.getElementById('d-title').textContent=data.length+' affectations — '+date+' — '+(session==='MATIN'?'Matin':'Après-midi');
   document.getElementById('d-tbody').innerHTML=data.length===0
     ?'<tr><td colspan="4" style="text-align:center;padding:20px;color:#999">Aucun dispatch.</td></tr>'
-    :data.map(d=>`<tr><td><b>Salle ${d.num_salle}</b></td><td>${d.capacite}</td>
-      <td><span class="bx bb">Jury ${d.jury_numero}</span></td>
-      <td>${d.jury_nom||'<i style="color:#999">—</i>'}</td></tr>`).join('');
+    :data.map(d=>'<tr><td><b>Salle '+d.num_salle+'</b></td><td>'+d.capacite+'</td><td><span class="bx bb">Jury '+d.jury_numero+'</span></td><td>'+(d.jury_nom||'<i style="color:#999">—</i>')+'</td></tr>').join('');
   document.getElementById('d-result').style.display='block';
 }
 
-// ── Jurys ───────────────────────────────────────────────────────────────────
 async function chargerJurys(){
   const code=document.getElementById('jury-etab-sel').value;
   if(!code) return;
-  jurysData = await api(`/etablissements/${code}/jurys`);
+  jurysData = await api('/etablissements/'+code+'/jurys');
   const etab = allEtabs.find(e=>String(e.code)===String(code));
-  document.getElementById('jury-etab-titre').textContent=
-    `${etab?.nom||''} — ${jurysData.length} jurys`;
-  document.getElementById('jury-tbody').innerHTML = jurysData.map(j=>`
-    <tr>
-      <td><span class="bx bb">Jury ${j.numero}</span></td>
-      <td>${j.nom||'<i style="color:#999">Non renseigné</i>'}</td>
-      <td><input type="text" class="jury-nom-input" data-id="${j.id}" value="${j.nom||''}" placeholder="Nom Prénom..."></td>
-    </tr>`).join('');
+  document.getElementById('jury-etab-titre').textContent=(etab?etab.nom:'')+' — '+jurysData.length+' jurys';
+  document.getElementById('jury-tbody').innerHTML = jurysData.map(j=>
+    '<tr><td><span class="bx bb">Jury '+j.numero+'</span></td>'
+    +'<td>'+(j.nom||'<i style="color:#999">Non renseigné</i>')+'</td>'
+    +'<td><input type="text" class="jury-nom-input" data-id="'+j.id+'" value="'+(j.nom||'')+'" placeholder="Nom Prénom..."></td></tr>'
+  ).join('');
   document.getElementById('jury-list-card').style.display='block';
 }
 
 async function sauvegarderJurys(){
   const inputs=document.querySelectorAll('.jury-nom-input');
-  const jurys=Array.from(inputs).map(inp=>({id:parseInt(inp.dataset.id), nom:inp.value.trim()||null}));
+  const jurys=Array.from(inputs).map(inp=>({id:parseInt(inp.dataset.id),nom:inp.value.trim()||null}));
   sp('sp-j',true);
   try {
     const r=await api('/jurys/bulk',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({jurys})});
-    msg('msg-jn',`✅ ${r.updated} jurys sauvegardés`,true);
+    msg('msg-jn','✅ '+r.updated+' jurys sauvegardés',true);
     chargerJurys();
   } catch(e){ msg('msg-jn',e.message,false); }
   sp('sp-j',false);
 }
 
-// ── QR Codes ────────────────────────────────────────────────────────────────
 function makeQR(text,label,sub,cls){
-  const w=document.createElement('div');w.className=`qr-card qc-${cls}`;w.dataset.type=cls;
+  const w=document.createElement('div');w.className='qr-card qc-'+cls;w.dataset.type=cls;
   const d=document.createElement('div');d.style.cssText='display:flex;justify-content:center';
   new QRCode(d,{text,width:110,height:110,correctLevel:QRCode.CorrectLevel.M});
   w.appendChild(d);
@@ -382,7 +372,7 @@ function makeQR(text,label,sub,cls){
 async function genererQR(){
   const code=document.getElementById('qr-etab').value;
   if(!code) return alert('Choisissez un centre');
-  const data=await api(`/qrcodes/${code}`);
+  const data=await api('/qrcodes/'+code);
   document.getElementById('qr-titre').textContent=data.etablissement.nom;
   document.getElementById('qr-code-lbl').textContent='Code : '+data.etablissement.code;
   const gc=document.getElementById('g-chef');gc.innerHTML='';
@@ -402,55 +392,57 @@ function filtrerQR(){
   document.getElementById('sec-jury').style.display=(t==='all'||t==='jury')?'block':'none';
 }
 
-// ── Vérifications ───────────────────────────────────────────────────────────
 async function chargerVerifs(){
   const date=document.getElementById('v-date').value;
   const session=document.getElementById('v-session').value;
   if(!date) return;
-  const data=await api(`/verifications/stats/${date}/${session}`);
+  const data=await api('/verifications/stats/'+date+'/'+session);
   document.getElementById('v-tbody').innerHTML=data.map(e=>{
     const pct=e.total_jurys>0?Math.round((e.total_verif/e.total_jurys)*100):0;
-    return `<tr>
-      <td>${e.nom}</td><td>${e.total_jurys}</td><td>${e.total_verif}</td>
-      <td><span class="bx bg3">${e.conformes||0}</span></td>
-      <td>${e.non_conformes>0?`<span class="bx br">${e.non_conformes}</span>`:'<span class="bx bk">0</span>'}</td>
-      <td style="min-width:110px"><div style="font-size:11px;color:#666">${pct}%</div>
-        <div class="pb"><div class="pf" style="width:${pct}%"></div></div></td></tr>`;
+    return '<tr><td>'+e.nom+'</td><td>'+e.total_jurys+'</td><td>'+e.total_verif+'</td>'
+      +'<td><span class="bx bg3">'+(e.conformes||0)+'</span></td>'
+      +'<td>'+(e.non_conformes>0?'<span class="bx br">'+e.non_conformes+'</span>':'<span class="bx bk">0</span>')+'</td>'
+      +'<td style="min-width:110px"><div style="font-size:11px;color:#666">'+pct+'%</div>'
+      +'<div class="pb"><div class="pf" style="width:'+pct+'%"></div></div></td></tr>';
   }).join('');
   document.getElementById('v-result').style.display='block';
 }
 
-// ── Signalements ────────────────────────────────────────────────────────────
 async function chargerSignalements(){
   try {
-    const data = await api("/signalements");
-    document.getElementById("signal-count").textContent = data.length + " signalement(s)";
-    const list = document.getElementById("signal-list");
-    if(data.length===0){
-      list.innerHTML='<div class="card" style="text-align:center;color:#999;padding:30px">Aucun signalement</div>';
+    const data = await api('/signalements');
+    document.getElementById('signal-count').textContent = data.length + ' signalement(s)';
+    const list = document.getElementById('signal-list');
+    if(data.length === 0){
+      list.innerHTML = '<div style="text-align:center;padding:40px;color:#999;font-size:14px;background:#fff;border-radius:10px;border:1px solid #e5e5e0">Aucun signalement pour le moment</div>';
       return;
     }
-    list.innerHTML = data.map(s=>{
-      const heure = new Date(s.heure_signal).toLocaleString("fr-FR");
-      const session = s.session ? (s.session==="MATIN"?"🌅 Matin":"🌇 Après-midi") : "—";
-      return `<div class="card" style="margin-bottom:12px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-          <div>
-            <div style="font-weight:600;font-size:14px">${s.etab_nom}</div>
-            <div style="font-size:12px;color:#6b7280;margin-top:2px">${heure} — ${session}</div>
-          </div>
-          <button class="btn bd" style="margin:0;padding:3px 10px;font-size:12px" onclick="supprimerSignalement(${s.id})">🗑 Supprimer</button>
-        </div>
-        <div style="margin-top:10px;padding:10px;background:#fef9f0;border-radius:7px;font-size:13px;border-left:3px solid #d97706">${s.description}</div>
-        ${s.photo_url ? `<img src="${s.photo_url}" style="margin-top:10px;max-width:100%;max-height:300px;border-radius:8px;object-fit:cover;cursor:pointer" onclick="window.open(this.src)">` : "<div style=\"margin-top:8px;font-size:12px;color:#999\">Aucune photo</div>"}
-      </div>`;
-    }).join("");
-  } catch(e){ console.error(e); }
+    list.innerHTML = data.map(s => {
+      const heure = new Date(s.heure_signal).toLocaleString('fr-FR');
+      const sessionLbl = s.session ? (s.session==='MATIN' ? '🌅 Matin' : '🌇 Après-midi') : '—';
+      const photoHtml = s.photo_url
+        ? '<img src="'+s.photo_url+'" onclick="window.open(\''+s.photo_url+'\')" title="Cliquez pour agrandir">'
+        : '<div style="margin-top:8px;font-size:12px;color:#999;font-style:italic">Aucune photo jointe</div>';
+      return '<div class="signal-card">'
+        + '<div class="signal-meta">'
+        + '<div>'
+        + '<div style="font-weight:600;font-size:14px">'+s.etab_nom+'</div>'
+        + '<div style="font-size:12px;color:#6b7280;margin-top:3px">'+heure+' — '+sessionLbl+'</div>'
+        + '</div>'
+        + '<button class="btn bd no-print" style="margin:0;padding:4px 12px;font-size:12px" onclick="supprimerSignalement('+s.id+')">🗑 Supprimer</button>'
+        + '</div>'
+        + '<div class="signal-desc">'+s.description+'</div>'
+        + photoHtml
+        + '</div>';
+    }).join('');
+  } catch(e){
+    document.getElementById('signal-list').innerHTML = '<div style="color:#dc2626;padding:20px">Erreur : '+e.message+'</div>';
+  }
 }
 
 async function supprimerSignalement(id){
-  if(!confirm("Supprimer ce signalement ?")) return;
-  await api(`/signalements/${id}`,{method:"DELETE"});
+  if(!confirm('Supprimer ce signalement définitivement ?')) return;
+  await api('/signalements/'+id, {method:'DELETE'});
   chargerSignalements();
 }
 
