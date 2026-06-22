@@ -96,7 +96,6 @@ async function initDB() {
             [i, null, parseInt(code)]);
       console.log('[DB] Données initiales chargées.');
     }
-    // Signalement table
     await client.query(`CREATE TABLE IF NOT EXISTS signalement (
       id           SERIAL PRIMARY KEY,
       code_etab    INTEGER NOT NULL REFERENCES etablissement(code),
@@ -107,7 +106,7 @@ async function initDB() {
       heure_signal TIMESTAMP DEFAULT NOW()
     );`);
 
-    console.log("[DB] Base prête.".');
+    console.log('[DB] Base prête.');
   } finally { client.release(); }
 }
 
@@ -513,15 +512,7 @@ app.get('/qrcodes/:code', async (req, res) => {
   } catch(err) { res.status(500).json({error:err.message}); }
 });
 
-// ─── DÉMARRAGE ───────────────────────────────────────────────────────────────
-initDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`\n✅ Serveur BAC v2.0 sur port ${PORT}`);
-    console.log(`   Admin : http://localhost:${PORT}/admin.html\n`);
-  });
-}).catch(err => { console.error('Erreur DB:', err); process.exit(1); });
-
-// ─── SIGNALEMENTS ─────────────────────────────────────────────────────────────
+// ─── SIGNALEMENTS ────────────────────────────────────────────────────────────
 
 // POST /signalements
 app.post('/signalements', async (req, res) => {
@@ -553,7 +544,7 @@ app.get('/signalements', async (req, res) => {
   } catch(err) { res.status(500).json({ error: err.message }); }
 });
 
-// GET /signalements/:code — signalements d'un centre
+// GET /signalements/:code
 app.get('/signalements/:code', async (req, res) => {
   try {
     const { rows } = await pool.query(
@@ -572,3 +563,11 @@ app.delete('/signalements/:id', async (req, res) => {
     res.json({ success: true });
   } catch(err) { res.status(500).json({ error: err.message }); }
 });
+
+// ─── DÉMARRAGE ───────────────────────────────────────────────────────────────
+initDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`\n✅ Serveur BAC v2.0 sur port ${PORT}`);
+    console.log(`   Admin : http://localhost:${PORT}/admin.html\n`);
+  });
+}).catch(err => { console.error('Erreur DB:', err); process.exit(1); });
