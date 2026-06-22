@@ -96,7 +96,18 @@ async function initDB() {
             [i, null, parseInt(code)]);
       console.log('[DB] Données initiales chargées.');
     }
-    console.log('[DB] Base prête.');
+    // Signalement table
+    await client.query(`CREATE TABLE IF NOT EXISTS signalement (
+      id           SERIAL PRIMARY KEY,
+      code_etab    INTEGER NOT NULL REFERENCES etablissement(code),
+      date_signal  DATE NOT NULL DEFAULT CURRENT_DATE,
+      session      TEXT,
+      description  TEXT NOT NULL,
+      photo_url    TEXT,
+      heure_signal TIMESTAMP DEFAULT NOW()
+    );`);
+
+    console.log("[DB] Base prête.".');
   } finally { client.release(); }
 }
 
@@ -509,3 +520,55 @@ initDB().then(() => {
     console.log(`   Admin : http://localhost:${PORT}/admin.html\n`);
   });
 }).catch(err => { console.error('Erreur DB:', err); process.exit(1); });
+
+// ─── SIGNALEMENTS ─────────────────────────────────────────────────────────────
+
+// POST /signalements
+app.post('/signalements', async (req, res) => {
+  try {
+    const { code_etab, session, description, photo_url } = req.body;
+    if (!code_etab || !description)
+      return res.status(400).json({ error: 'code_etab et description requis' });
+    const { rows } = await pool.query(
+      `INSERT INTO signalement(code_etab, session, description, photo_url)
+       VALUES($1,$2,$3,$4) RETURNING id, heure_signal`,
+      [code_etab, session || null, description, photo_url || null]
+    );
+    res.json({ success: true, id: rows[0].id, heure: rows[0].heure_signal });
+  } catch(err) { res.status(500).json({ error: err.message }); }
+});
+
+// GET /signalements — tous (admin)
+app.get('/signalements', async (req, res) => {
+  try {
+    const { rows } = await pool.query(`
+      SELECT s.id, e.nom AS etab_nom, s.code_etab,
+             TO_CHAR(s.date_signal,'YYYY-MM-DD') AS date_signal,
+             s.session, s.description, s.photo_url,
+             s.heure_signal
+      FROM signalement s
+      JOIN etablissement e ON e.code=s.code_etab
+      ORDER BY s.heure_signal DESC`);
+    res.json(rows);
+  } catch(err) { res.status(500).json({ error: err.message }); }
+});
+
+// GET /signalements/:code — signalements d'un centre
+app.get('/signalements/:code', async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      `SELECT id, TO_CHAR(date_signal,'YYYY-MM-DD') AS date_signal,
+              session, description, photo_url, heure_signal
+       FROM signalement WHERE code_etab=$1 ORDER BY heure_signal DESC`,
+      [req.params.code]);
+    res.json(rows);
+  } catch(err) { res.status(500).json({ error: err.message }); }
+});
+
+// DELETE /signalements/:id
+app.delete('/signalements/:id', async (req, res) => {
+  try {
+    await pool.query('DELETE FROM signalement WHERE id=$1', [req.params.id]);
+    res.json({ success: true });
+  } catch(err) { res.status(500).json({ error: err.message }); }
+});

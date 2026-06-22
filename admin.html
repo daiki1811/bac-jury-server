@@ -1,248 +1,460 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin — Gestion des Jurys BAC</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — Jurys BAC</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a;padding:24px}
-  h1{font-size:20px;font-weight:600;margin-bottom:4px}
-  .subtitle{color:#666;font-size:13px;margin-bottom:24px}
-  .card{background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:20px;margin-bottom:16px}
-  .card h2{font-size:15px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-  label{display:block;font-size:13px;color:#555;margin-bottom:4px;margin-top:12px}
-  select,input[type=date],input[type=text]{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:14px;background:#fff}
-  select:focus,input:focus{outline:2px solid #3b82f6;outline-offset:1px}
-  button{padding:9px 18px;border-radius:7px;border:none;font-size:14px;font-weight:500;cursor:pointer;transition:opacity .15s}
-  .btn-primary{background:#1d4ed8;color:#fff}
-  .btn-primary:hover{opacity:.85}
-  .btn-danger{background:#dc2626;color:#fff}
-  .btn-danger:hover{opacity:.85}
-  .btn-success{background:#16a34a;color:#fff}
-  .btn-success:hover{opacity:.85}
-  .btn-sec{background:#f3f4f6;color:#374151;border:1px solid #d1d5db}
-  .btn-sec:hover{background:#e5e7eb}
-  .msg{padding:10px 14px;border-radius:7px;font-size:13px;margin-top:12px;display:none}
-  .msg.ok{background:#dcfce7;color:#166534;display:block}
-  .msg.err{background:#fee2e2;color:#991b1b;display:block}
-  .row{display:flex;gap:12px;flex-wrap:wrap}
-  .row>*{flex:1;min-width:180px}
-  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
-  th{text-align:left;padding:8px 10px;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-weight:500;color:#6b7280}
-  td{padding:8px 10px;border-bottom:1px solid #f3f4f6;vertical-align:top}
-  tr:hover td{background:#fafafa}
-  .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-  .b-blue{background:#dbeafe;color:#1e40af}
-  .b-green{background:#dcfce7;color:#166534}
-  .b-gray{background:#f3f4f6;color:#374151}
-  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px}
-  .stat{background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:12px;text-align:center}
-  .stat-v{font-size:24px;font-weight:700;color:#1d4ed8}
-  .stat-l{font-size:11px;color:#6b7280;margin-top:2px}
-  .section-title{font-size:13px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.04em;margin:16px 0 8px}
-  .spinner{display:none;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-left:6px}
-  @keyframes spin{to{transform:rotate(360deg)}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a}
+nav{background:#1d4ed8;display:flex;flex-wrap:wrap}
+nav a{color:rgba(255,255,255,.7);padding:13px 16px;font-size:14px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+nav a.active{color:#fff;border-bottom-color:#fff}
+.page{display:none;padding:20px;max-width:1100px;margin:0 auto}
+.page.active{display:block}
+h1{font-size:18px;font-weight:600;margin-bottom:4px}
+.sub{color:#666;font-size:13px;margin-bottom:18px}
+.card{background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:18px;margin-bottom:14px}
+.card h2{font-size:15px;font-weight:600;margin-bottom:12px}
+label{display:block;font-size:12px;color:#555;margin-bottom:3px;margin-top:10px}
+select,input[type=date],input[type=text]{width:100%;padding:7px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px}
+.btn{padding:8px 16px;border-radius:7px;border:none;font-size:13px;font-weight:500;cursor:pointer;margin-top:10px}
+.bp{background:#1d4ed8;color:#fff}.bs{background:#f3f4f6;color:#374151;border:1px solid #d1d5db}
+.bd{background:#dc2626;color:#fff}.bg2{background:#16a34a;color:#fff}
+.msg{padding:9px 12px;border-radius:7px;font-size:13px;margin-top:10px;display:none}
+.msg.ok{background:#dcfce7;color:#166534;display:block}
+.msg.err{background:#fee2e2;color:#991b1b;display:block}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1;min-width:160px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:7px 10px;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-weight:500;color:#6b7280}
+td{padding:7px 10px;border-bottom:1px solid #f3f4f6;vertical-align:middle}
+tr:hover td{background:#fafafa}
+.bx{display:inline-block;padding:2px 7px;border-radius:20px;font-size:11px;font-weight:500}
+.bb{background:#dbeafe;color:#1e40af}.bg3{background:#dcfce7;color:#166534}
+.br{background:#fee2e2;color:#991b1b}.bk{background:#f3f4f6;color:#374151}
+.tbl-wrap{max-height:420px;overflow-y:auto;border:1px solid #e5e7eb;border-radius:8px}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.st{background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:12px;text-align:center}
+.sv{font-size:22px;font-weight:700;color:#1d4ed8}.sl{font-size:11px;color:#6b7280;margin-top:2px}
+.qr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px;margin-top:10px}
+.qr-card{border:1px solid #ddd;border-radius:8px;padding:10px;text-align:center;background:#fff;break-inside:avoid}
+.qr-lbl{font-size:11px;color:#444;margin-top:6px;font-weight:600;word-break:break-word}
+.qr-sub{font-size:10px;color:#888;margin-top:2px}
+.qc-chef{border:2px solid #1d4ed8}.qc-salle{border-color:#16a34a}.qc-jury{border-color:#d97706}
+.sec-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin:16px 0 6px;color:#6b7280}
+.pb{height:7px;background:#e5e7eb;border-radius:4px;overflow:hidden;margin-top:3px}
+.pf{height:100%;background:#16a34a;border-radius:4px;transition:width .3s}
+.sp{display:none;width:13px;height:13px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-left:5px}
+@keyframes spin{to{transform:rotate(360deg)}}
+input[type=text].jury-nom-input{padding:4px 7px;font-size:12px;border:1px solid #ddd;border-radius:5px;width:180px}
+@media print{nav,.no-print{display:none!important}.card{border:none;padding:0}body{background:#fff}.qr-grid{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
 <body>
+<nav>
+  <a class="active" onclick="showPage('dispatch',this)">🔀 Dispatch</a>
+  <a onclick="showPage('jours',this)">📅 Jours</a>
+  <a onclick="showPage('jurys',this)">👤 Jurys</a>
+  <a onclick="showPage('qrcodes',this)">📇 QR Codes</a>
+  <a onclick="showPage('verif',this)">✅ Vérifications</a>
+  <a onclick="showPage('signal',this)">🚨 Signalements</a>
+</nav>
 
-<h1>🎓 Gestion des Jurys — Baccalauréat</h1>
-<p class="subtitle">Interface administrateur — Dispatch des jurys par établissement</p>
-
-<!-- Stats globales -->
-<div class="stats-grid" id="statsGrid">
-  <div class="stat"><div class="stat-v" id="st-etab">—</div><div class="stat-l">Établissements</div></div>
-  <div class="stat"><div class="stat-v" id="st-jurys">—</div><div class="stat-l">Jurys total</div></div>
-  <div class="stat"><div class="stat-v" id="st-salles">—</div><div class="stat-l">Salles (type G)</div></div>
-</div>
-
-<!-- Dispatch global -->
-<div class="card">
-  <h2>🔀 Dispatch global — tous les établissements</h2>
-  <div class="row">
-    <div>
-      <label>Date de l'examen</label>
-      <input type="date" id="g-date">
-    </div>
-    <div>
-      <label>Session</label>
-      <select id="g-session">
-        <option value="MATIN">Matin</option>
-        <option value="APRES_MIDI">Après-midi</option>
-      </select>
-    </div>
+<!-- ══ DISPATCH ══════════════════════════════════════════════════════════════ -->
+<div class="page active" id="page-dispatch">
+  <h1>Dispatch des jurys</h1><p class="sub">Affectation aléatoire par session</p>
+  <div class="sg">
+    <div class="st"><div class="sv" id="st-e">—</div><div class="sl">Centres</div></div>
+    <div class="st"><div class="sv" id="st-j">—</div><div class="sl">Jurys</div></div>
+    <div class="st"><div class="sv" id="st-s">—</div><div class="sl">Salles</div></div>
   </div>
-  <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-    <button class="btn-primary" onclick="dispatchTous()">
-      🔀 Générer le dispatch pour TOUS les centres
-      <span class="spinner" id="sp-tous"></span>
-    </button>
-  </div>
-  <div class="msg" id="msg-tous"></div>
-</div>
-
-<!-- Dispatch par établissement -->
-<div class="card">
-  <h2>🏫 Dispatch par établissement</h2>
-  <div class="row">
-    <div>
-      <label>Établissement</label>
-      <select id="etab-sel" onchange="loadSessionsEtab()">
-        <option value="">— Choisir —</option>
-      </select>
+  <div class="card">
+    <h2>🔀 Dispatch global — tous les centres</h2>
+    <div class="row">
+      <div><label>Date</label><select id="g-date"><option value="">— Choisir un jour —</option></select></div>
+      <div><label>Session</label>
+        <select id="g-session"><option value="MATIN">Matin</option><option value="APRES_MIDI">Après-midi</option></select>
+      </div>
     </div>
-    <div>
-      <label>Date</label>
-      <input type="date" id="e-date">
-    </div>
-    <div>
-      <label>Session</label>
-      <select id="e-session">
-        <option value="MATIN">Matin</option>
-        <option value="APRES_MIDI">Après-midi</option>
-      </select>
-    </div>
+    <button class="btn bp" onclick="dispatchTous()">🔀 Générer + Notifier tous les centres <span class="sp" id="sp-t"></span></button>
+    <div class="msg" id="msg-t"></div>
   </div>
-  <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-    <button class="btn-primary" onclick="dispatchEtab()">
-      🔀 Générer ce dispatch
-      <span class="spinner" id="sp-etab"></span>
-    </button>
-    <button class="btn-sec" onclick="voirDispatch()">👁 Voir le dispatch</button>
-  </div>
-  <div class="msg" id="msg-etab"></div>
-
-  <div id="dispatch-result" style="display:none">
-    <div class="section-title" id="dispatch-title"></div>
-    <table>
-      <thead><tr><th>Salle</th><th>Capacité</th><th>Jury n°</th><th>Nom du jury</th></tr></thead>
-      <tbody id="dispatch-tbody"></tbody>
-    </table>
+  <div class="card">
+    <h2>🏫 Dispatch par centre</h2>
+    <div class="row">
+      <div><label>Centre</label><select id="etab-sel"><option value="">— Choisir —</option></select></div>
+      <div><label>Date</label><select id="e-date"><option value="">— Choisir un jour —</option></select></div>
+      <div><label>Session</label>
+        <select id="e-session"><option value="MATIN">Matin</option><option value="APRES_MIDI">Après-midi</option></select>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn bp" onclick="dispatchEtab()">🔀 Générer <span class="sp" id="sp-e"></span></button>
+      <button class="btn bs" onclick="voirDispatch()">👁 Voir</button>
+    </div>
+    <div class="msg" id="msg-e"></div>
+    <div id="d-result" style="display:none;margin-top:14px">
+      <div style="font-size:13px;font-weight:600;color:#6b7280;margin-bottom:6px" id="d-title"></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Salle</th><th>Cap.</th><th>Jury n°</th><th>Nom</th></tr></thead>
+      <tbody id="d-tbody"></tbody></table></div>
+    </div>
   </div>
 </div>
 
-<!-- Tableau de bord établissements -->
-<div class="card">
-  <h2>📋 Tableau de bord des centres</h2>
-  <table>
-    <thead><tr><th>Code</th><th>Établissement</th><th>Salles</th><th>Jurys</th></tr></thead>
-    <tbody id="etab-tbody"></tbody>
-  </table>
+<!-- ══ JOURS ═════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-jours">
+  <h1>Jours d'examen</h1><p class="sub">Configurez les dates du baccalauréat</p>
+  <div class="card">
+    <h2>➕ Ajouter un jour</h2>
+    <div class="row">
+      <div><label>Date</label><input type="date" id="j-date"></div>
+      <div><label>Label (ex: Jour 1 — Français)</label><input type="text" id="j-label" placeholder="Jour 1 — Français"></div>
+    </div>
+    <button class="btn bp" onclick="ajouterJour()">➕ Ajouter</button>
+    <div class="msg" id="msg-j"></div>
+  </div>
+  <div class="card">
+    <h2>📅 Jours configurés</h2>
+    <div class="tbl-wrap">
+      <table><thead><tr><th>Date</th><th>Label</th><th>Statut</th><th class="no-print">Action</th></tr></thead>
+      <tbody id="j-tbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ JURYS ═════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-jurys">
+  <h1>Saisie des noms des jurys</h1><p class="sub">Renseignez les noms après recrutement — les QR codes ne changent pas</p>
+  <div class="card">
+    <div class="row">
+      <div><label>Centre</label><select id="jury-etab-sel" onchange="chargerJurys()"><option value="">— Choisir —</option></select></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+      <button class="btn bg2" onclick="sauvegarderJurys()">💾 Sauvegarder tous les noms <span class="sp" id="sp-j"></span></button>
+      <button class="btn bs" onclick="chargerJurys()">🔄 Recharger</button>
+    </div>
+    <div class="msg" id="msg-jn"></div>
+  </div>
+  <div class="card" id="jury-list-card" style="display:none">
+    <div style="font-size:13px;color:#6b7280;margin-bottom:10px" id="jury-etab-titre"></div>
+    <div class="tbl-wrap">
+      <table><thead><tr><th>N°</th><th>Nom actuel</th><th>Nouveau nom</th></tr></thead>
+      <tbody id="jury-tbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ QR CODES ══════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-qrcodes">
+  <h1>QR Codes</h1><p class="sub">Générez les cartes pour chefs, salles et jurys</p>
+  <div class="card no-print">
+    <div class="row">
+      <div><label>Centre</label><select id="qr-etab"><option value="">— Choisir —</option></select></div>
+      <div><label>Afficher</label>
+        <select id="qr-type" onchange="filtrerQR()">
+          <option value="all">Tout</option>
+          <option value="chef">Chef de centre</option>
+          <option value="salle">Salles</option>
+          <option value="jury">Jurys</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn bp" onclick="genererQR()">📇 Générer</button>
+      <button class="btn bs" onclick="window.print()">🖨 Imprimer</button>
+    </div>
+  </div>
+  <div class="card" id="qr-out" style="display:none">
+    <div id="qr-titre" style="font-size:16px;font-weight:700;margin-bottom:2px"></div>
+    <div id="qr-code-lbl" style="font-size:12px;color:#888;margin-bottom:10px"></div>
+    <div id="sec-chef"><div class="sec-lbl">🎓 Chef de Centre</div><div class="qr-grid" id="g-chef"></div></div>
+    <div id="sec-salle"><div class="sec-lbl">🚪 Salles</div><div class="qr-grid" id="g-salle"></div></div>
+    <div id="sec-jury"><div class="sec-lbl">👤 Jurys</div><div class="qr-grid" id="g-jury"></div></div>
+  </div>
+</div>
+
+<!-- ══ VÉRIFICATIONS ═════════════════════════════════════════════════════════ -->
+<div class="page" id="page-verif">
+  <h1>Vérifications en temps réel</h1><p class="sub">Présence des jurys dans leurs salles</p>
+  <div class="card">
+    <div class="row">
+      <div><label>Date</label><select id="v-date"><option value="">— Choisir un jour —</option></select></div>
+      <div><label>Session</label>
+        <select id="v-session"><option value="MATIN">Matin</option><option value="APRES_MIDI">Après-midi</option></select>
+      </div>
+      <div style="display:flex;align-items:flex-end">
+        <button class="btn bp" onclick="chargerVerifs()">🔄 Actualiser</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" id="v-result" style="display:none">
+    <div class="tbl-wrap">
+      <table><thead><tr><th>Centre</th><th>Total jurys</th><th>Vérifiés</th><th>Conformes</th><th>Anomalies</th><th>Progression</th></tr></thead>
+      <tbody id="v-tbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SIGNALEMENTS ══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-signal">
+  <h1>Signalements de fraude</h1><p class="sub">Photos et descriptions envoyées par les chefs de centre</p>
+  <div class="card">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <button class="btn bp" onclick="chargerSignalements()">🔄 Actualiser</button>
+      <span id="signal-count" style="font-size:13px;color:#6b7280"></span>
+    </div>
+  </div>
+  <div id="signal-list"></div>
 </div>
 
 <script>
-const API = '';
+const API='';
+let allEtabs=[], allJours=[], jurysData=[];
 
-async function api(path, opts) {
-  const r = await fetch(API + path, opts);
+async function api(path,opts){
+  const r=await fetch(API+path,opts);
+  if(!r.ok) throw new Error(await r.text());
   return r.json();
 }
+function today(){return new Date().toISOString().slice(0,10);}
+function msg(id,txt,ok){const e=document.getElementById(id);e.textContent=txt;e.className='msg '+(ok?'ok':'err');}
+function sp(id,on){document.getElementById(id).style.display=on?'inline-block':'none';}
 
-function today() {
-  return new Date().toISOString().slice(0, 10);
+function showPage(name,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  el.classList.add('active');
 }
 
-function showMsg(id, text, ok) {
-  const el = document.getElementById(id);
-  el.textContent = text;
-  el.className = 'msg ' + (ok ? 'ok' : 'err');
-}
+// ── Init ────────────────────────────────────────────────────────────────────
+async function init(){
+  // Charger étabs
+  allEtabs = await api('/etablissements');
+  allEtabs.sort((a,b)=>a.nom.localeCompare(b.nom));
+  let j=0,s=0; allEtabs.forEach(e=>{j+=e.nb_jurys;s+=e.nb_salles;});
+  document.getElementById('st-e').textContent=allEtabs.length;
+  document.getElementById('st-j').textContent=j;
+  document.getElementById('st-s').textContent=s;
 
-function spin(id, on) {
-  document.getElementById(id).style.display = on ? 'inline-block' : 'none';
-}
-
-async function loadStats() {
-  const etabs = await api('/etablissements');
-  document.getElementById('st-etab').textContent = etabs.length;
-  let jurys = 0, salles = 0;
-  etabs.forEach(e => { jurys += e.nb_jurys; salles += e.nb_salles; });
-  document.getElementById('st-jurys').textContent = jurys;
-  document.getElementById('st-salles').textContent = salles;
-
-  const sel = document.getElementById('etab-sel');
-  etabs.sort((a,b)=>a.nom.localeCompare(b.nom));
-  etabs.forEach(e => {
-    const opt = document.createElement('option');
-    opt.value = e.code;
-    opt.textContent = e.nom;
-    sel.appendChild(opt);
+  // Remplir selects étabs
+  ['etab-sel','qr-etab','jury-etab-sel'].forEach(id=>{
+    const sel=document.getElementById(id);
+    allEtabs.forEach(e=>{const o=document.createElement('option');o.value=e.code;o.textContent=e.nom;sel.appendChild(o);});
   });
 
-  const tbody = document.getElementById('etab-tbody');
-  tbody.innerHTML = etabs.map(e => `
+  // Charger jours
+  await chargerJours();
+}
+
+// ── Jours ───────────────────────────────────────────────────────────────────
+async function chargerJours(){
+  try {
+    allJours = await api('/jours/tous');
+    // Remplir les selects de dates
+    ['g-date','e-date','v-date'].forEach(id=>{
+      const sel=document.getElementById(id);
+      const cur=sel.value;
+      sel.innerHTML='<option value="">— Choisir un jour —</option>';
+      allJours.forEach(j=>{
+        if(!j.actif) return;
+        const o=document.createElement('option');
+        o.value=j.date_exam.slice(0,10);
+        o.textContent=j.label+' ('+j.date_exam.slice(0,10)+')';
+        sel.appendChild(o);
+      });
+      if(cur) sel.value=cur;
+    });
+    // Tableau des jours
+    document.getElementById('j-tbody').innerHTML = allJours.length===0
+      ? '<tr><td colspan="4" style="text-align:center;padding:20px;color:#999">Aucun jour configuré</td></tr>'
+      : allJours.map(j=>`<tr>
+          <td>${j.date_exam.slice(0,10)}</td>
+          <td>${j.label}</td>
+          <td>${j.actif?'<span class="bx bg3">Actif</span>':'<span class="bx bk">Inactif</span>'}</td>
+          <td class="no-print"><button class="btn bd" style="margin:0;padding:3px 10px;font-size:12px" onclick="supprimerJour(${j.id})">🗑 Supprimer</button></td>
+        </tr>`).join('');
+  } catch(e){ console.error(e); }
+}
+
+async function ajouterJour(){
+  const date=document.getElementById('j-date').value;
+  const label=document.getElementById('j-label').value.trim();
+  if(!date||!label) return msg('msg-j','Date et label requis',false);
+  try {
+    await api('/jours',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date_exam:date,label})});
+    msg('msg-j','Jour ajouté ✅',true);
+    document.getElementById('j-date').value='';
+    document.getElementById('j-label').value='';
+    await chargerJours();
+  } catch(e){ msg('msg-j',e.message,false); }
+}
+
+async function supprimerJour(id){
+  if(!confirm('Supprimer ce jour ?')) return;
+  await api(`/jours/${id}`,{method:'DELETE'});
+  await chargerJours();
+}
+
+// ── Dispatch ────────────────────────────────────────────────────────────────
+async function dispatchTous(){
+  const date=document.getElementById('g-date').value;
+  const session=document.getElementById('g-session').value;
+  if(!date) return msg('msg-t','Choisissez un jour.',false);
+  sp('sp-t',true);
+  try {
+    const r=await api('/dispatch/generer-tous',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date,session})});
+    msg('msg-t',r.message,true);
+  } catch(e){ msg('msg-t',e.message,false); }
+  sp('sp-t',false);
+}
+
+async function dispatchEtab(){
+  const code=document.getElementById('etab-sel').value;
+  const date=document.getElementById('e-date').value;
+  const session=document.getElementById('e-session').value;
+  if(!code||!date) return msg('msg-e','Choisir un centre et un jour.',false);
+  sp('sp-e',true);
+  try {
+    const r=await api('/dispatch/generer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code_etab:parseInt(code),date,session})});
+    msg('msg-e',r.message,true);
+    voirDispatch();
+  } catch(e){ msg('msg-e',e.message,false); }
+  sp('sp-e',false);
+}
+
+async function voirDispatch(){
+  const code=document.getElementById('etab-sel').value;
+  const date=document.getElementById('e-date').value;
+  const session=document.getElementById('e-session').value;
+  if(!code||!date) return;
+  const data=await api(`/dispatch/${code}/${date}/${session}`);
+  const sl=session==='MATIN'?'Matin':'Après-midi';
+  document.getElementById('d-title').textContent=`${data.length} affectations — ${date} — ${sl}`;
+  document.getElementById('d-tbody').innerHTML=data.length===0
+    ?'<tr><td colspan="4" style="text-align:center;padding:20px;color:#999">Aucun dispatch.</td></tr>'
+    :data.map(d=>`<tr><td><b>Salle ${d.num_salle}</b></td><td>${d.capacite}</td>
+      <td><span class="bx bb">Jury ${d.jury_numero}</span></td>
+      <td>${d.jury_nom||'<i style="color:#999">—</i>'}</td></tr>`).join('');
+  document.getElementById('d-result').style.display='block';
+}
+
+// ── Jurys ───────────────────────────────────────────────────────────────────
+async function chargerJurys(){
+  const code=document.getElementById('jury-etab-sel').value;
+  if(!code) return;
+  jurysData = await api(`/etablissements/${code}/jurys`);
+  const etab = allEtabs.find(e=>String(e.code)===String(code));
+  document.getElementById('jury-etab-titre').textContent=
+    `${etab?.nom||''} — ${jurysData.length} jurys`;
+  document.getElementById('jury-tbody').innerHTML = jurysData.map(j=>`
     <tr>
-      <td><span class="badge b-gray">${e.code}</span></td>
-      <td>${e.nom}</td>
-      <td><span class="badge b-blue">${e.nb_salles} salles</span></td>
-      <td><span class="badge b-green">${e.nb_jurys} jurys</span></td>
-    </tr>
-  `).join('');
+      <td><span class="bx bb">Jury ${j.numero}</span></td>
+      <td>${j.nom||'<i style="color:#999">Non renseigné</i>'}</td>
+      <td><input type="text" class="jury-nom-input" data-id="${j.id}" value="${j.nom||''}" placeholder="Nom Prénom..."></td>
+    </tr>`).join('');
+  document.getElementById('jury-list-card').style.display='block';
 }
 
-async function dispatchTous() {
-  const date = document.getElementById('g-date').value;
-  const session = document.getElementById('g-session').value;
-  if (!date) return showMsg('msg-tous', 'Veuillez sélectionner une date.', false);
-  spin('sp-tous', true);
-  const r = await api('/dispatch/generer-tous', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ date, session })
-  });
-  spin('sp-tous', false);
-  showMsg('msg-tous', r.message || r.error, !!r.success);
+async function sauvegarderJurys(){
+  const inputs=document.querySelectorAll('.jury-nom-input');
+  const jurys=Array.from(inputs).map(inp=>({id:parseInt(inp.dataset.id), nom:inp.value.trim()||null}));
+  sp('sp-j',true);
+  try {
+    const r=await api('/jurys/bulk',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({jurys})});
+    msg('msg-jn',`✅ ${r.updated} jurys sauvegardés`,true);
+    chargerJurys();
+  } catch(e){ msg('msg-jn',e.message,false); }
+  sp('sp-j',false);
 }
 
-async function dispatchEtab() {
-  const code = document.getElementById('etab-sel').value;
-  const date = document.getElementById('e-date').value;
-  const session = document.getElementById('e-session').value;
-  if (!code || !date) return showMsg('msg-etab', 'Choisir un établissement et une date.', false);
-  spin('sp-etab', true);
-  const r = await api('/dispatch/generer', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ code_etab: parseInt(code), date, session })
-  });
-  spin('sp-etab', false);
-  showMsg('msg-etab', r.message || r.error, !!r.success);
-  if (r.success) voirDispatch();
+// ── QR Codes ────────────────────────────────────────────────────────────────
+function makeQR(text,label,sub,cls){
+  const w=document.createElement('div');w.className=`qr-card qc-${cls}`;w.dataset.type=cls;
+  const d=document.createElement('div');d.style.cssText='display:flex;justify-content:center';
+  new QRCode(d,{text,width:110,height:110,correctLevel:QRCode.CorrectLevel.M});
+  w.appendChild(d);
+  const l=document.createElement('div');l.className='qr-lbl';l.textContent=label;w.appendChild(l);
+  if(sub){const s=document.createElement('div');s.className='qr-sub';s.textContent=sub;w.appendChild(s);}
+  return w;
 }
 
-async function voirDispatch() {
-  const code = document.getElementById('etab-sel').value;
-  const date = document.getElementById('e-date').value;
-  const session = document.getElementById('e-session').value;
-  if (!code || !date) return;
-  const data = await api(`/dispatch/${code}/${date}/${session}`);
-  const result = document.getElementById('dispatch-result');
-  const titre = document.getElementById('dispatch-title');
-  const tbody = document.getElementById('dispatch-tbody');
-  const sessionLabel = session === 'MATIN' ? '🌅 Matin' : '🌇 Après-midi';
-  titre.textContent = `Affectations — ${date} — ${sessionLabel} (${data.length} jurys)`;
-  if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#999;padding:20px">Aucun dispatch pour cette session.</td></tr>';
-  } else {
-    tbody.innerHTML = data.map(d => `
-      <tr>
-        <td><strong>Salle ${d.num_salle}</strong></td>
-        <td>${d.capacite} candidats</td>
-        <td><span class="badge b-blue">Jury ${d.jury_numero}</span></td>
-        <td>${d.jury_nom || '<span style="color:#999;font-style:italic">Non recruté</span>'}</td>
-      </tr>
-    `).join('');
-  }
-  result.style.display = 'block';
+async function genererQR(){
+  const code=document.getElementById('qr-etab').value;
+  if(!code) return alert('Choisissez un centre');
+  const data=await api(`/qrcodes/${code}`);
+  document.getElementById('qr-titre').textContent=data.etablissement.nom;
+  document.getElementById('qr-code-lbl').textContent='Code : '+data.etablissement.code;
+  const gc=document.getElementById('g-chef');gc.innerHTML='';
+  gc.appendChild(makeQR(data.qr_chef,'Chef de Centre',data.etablissement.nom,'chef'));
+  const gs=document.getElementById('g-salle');gs.innerHTML='';
+  data.qr_salles.forEach(s=>gs.appendChild(makeQR(s.qr,'Salle '+s.num_salle,data.etablissement.nom,'salle')));
+  const gj=document.getElementById('g-jury');gj.innerHTML='';
+  data.qr_jurys.forEach(j=>gj.appendChild(makeQR(j.qr,'Jury '+j.numero,j.nom||'—','jury')));
+  document.getElementById('qr-out').style.display='block';
+  filtrerQR();
 }
 
-function loadSessionsEtab() {}
+function filtrerQR(){
+  const t=document.getElementById('qr-type').value;
+  document.getElementById('sec-chef').style.display=(t==='all'||t==='chef')?'block':'none';
+  document.getElementById('sec-salle').style.display=(t==='all'||t==='salle')?'block':'none';
+  document.getElementById('sec-jury').style.display=(t==='all'||t==='jury')?'block':'none';
+}
 
-// Init
-document.getElementById('g-date').value = today();
-document.getElementById('e-date').value = today();
-loadStats();
+// ── Vérifications ───────────────────────────────────────────────────────────
+async function chargerVerifs(){
+  const date=document.getElementById('v-date').value;
+  const session=document.getElementById('v-session').value;
+  if(!date) return;
+  const data=await api(`/verifications/stats/${date}/${session}`);
+  document.getElementById('v-tbody').innerHTML=data.map(e=>{
+    const pct=e.total_jurys>0?Math.round((e.total_verif/e.total_jurys)*100):0;
+    return `<tr>
+      <td>${e.nom}</td><td>${e.total_jurys}</td><td>${e.total_verif}</td>
+      <td><span class="bx bg3">${e.conformes||0}</span></td>
+      <td>${e.non_conformes>0?`<span class="bx br">${e.non_conformes}</span>`:'<span class="bx bk">0</span>'}</td>
+      <td style="min-width:110px"><div style="font-size:11px;color:#666">${pct}%</div>
+        <div class="pb"><div class="pf" style="width:${pct}%"></div></div></td></tr>`;
+  }).join('');
+  document.getElementById('v-result').style.display='block';
+}
+
+// ── Signalements ────────────────────────────────────────────────────────────
+async function chargerSignalements(){
+  try {
+    const data = await api("/signalements");
+    document.getElementById("signal-count").textContent = data.length + " signalement(s)";
+    const list = document.getElementById("signal-list");
+    if(data.length===0){
+      list.innerHTML='<div class="card" style="text-align:center;color:#999;padding:30px">Aucun signalement</div>';
+      return;
+    }
+    list.innerHTML = data.map(s=>{
+      const heure = new Date(s.heure_signal).toLocaleString("fr-FR");
+      const session = s.session ? (s.session==="MATIN"?"🌅 Matin":"🌇 Après-midi") : "—";
+      return `<div class="card" style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div>
+            <div style="font-weight:600;font-size:14px">${s.etab_nom}</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:2px">${heure} — ${session}</div>
+          </div>
+          <button class="btn bd" style="margin:0;padding:3px 10px;font-size:12px" onclick="supprimerSignalement(${s.id})">🗑 Supprimer</button>
+        </div>
+        <div style="margin-top:10px;padding:10px;background:#fef9f0;border-radius:7px;font-size:13px;border-left:3px solid #d97706">${s.description}</div>
+        ${s.photo_url ? `<img src="${s.photo_url}" style="margin-top:10px;max-width:100%;max-height:300px;border-radius:8px;object-fit:cover;cursor:pointer" onclick="window.open(this.src)">` : "<div style=\"margin-top:8px;font-size:12px;color:#999\">Aucune photo</div>"}
+      </div>`;
+    }).join("");
+  } catch(e){ console.error(e); }
+}
+
+async function supprimerSignalement(id){
+  if(!confirm("Supprimer ce signalement ?")) return;
+  await api(`/signalements/${id}`,{method:"DELETE"});
+  chargerSignalements();
+}
+
+init();
 </script>
 </body>
 </html>
